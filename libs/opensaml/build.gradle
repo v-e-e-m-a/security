@@ -64,3 +64,10 @@ tasks.shadowJar {
     exclude 'META-INF/versions/**/com/fasterxml/**'
     exclude 'META-INF/services/org.opensaml.security.crypto.ec.NamedCurve'
 }
+
+// Pin com.fasterxml.jackson.core:jackson-databind to a patched version for CVE-2026-54515 (transitive dependency; not declared directly).
+configurations.all {
+    resolutionStrategy {
+        force "com.fasterxml.jackson.core:jackson-databind:${versions.jackson_databind}"
+    }
+}
